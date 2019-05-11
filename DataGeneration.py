@@ -36,10 +36,10 @@ def GenSequencesProgressive(hypothesis, mean, variance, sequence_count):
 		if (hypothesis == "+"):
 			val = np.random.normal(mean, variance)
 			val = int(np.sign(val) * math.floor(abs(val)))
-			start = random.randint(1, 41) + val
+			start = random.randint(1, 50) + val
 			temp = start 
 			sequence = [temp]
-			factor = [ random.choice([i for i in range(1,11)]) ]
+			factor = [ random.choice([i for i in range(1,7)]) ]
 			for i in range(5):
 				val = np.random.normal(mean, variance)
 				val = int(np.sign(val) * math.floor(abs(val)))
@@ -276,7 +276,7 @@ def main():
 	mean = 0
 	variance = 0.66
 
-	x = 600
+	x = 5000
 	y = 300
 	z = 200
 	Addition_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"+",x)
@@ -288,14 +288,14 @@ def main():
 	Comb_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"x+",z)
 	Comb_Hypotheses_Progressive = GenNoiseProgressive(0,0.66,"x+",y)
 
-	WriteFile("Addition_Hypotheses_Stationary.txt", Addition_Hypotheses_Stationary)
-	WriteFile("Addition_Hypotheses_Progressive.txt", Addition_Hypotheses_Progressive)
+	#WriteFile("Addition_Hypotheses_Stationary.txt", Addition_Hypotheses_Stationary)
+	WriteFile("Addition_Hypotheses_Progressive2.txt", Addition_Hypotheses_Progressive)
 
-	WriteFile("Multiplication_Hypotheses_Stationary.txt", Multiplication_Hypotheses_Stationary)
+	'''WriteFile("Multiplication_Hypotheses_Stationary.txt", Multiplication_Hypotheses_Stationary)
 	WriteFile("Multiplication_Hypotheses_Progressive.txt", Multiplication_Hypotheses_Progressive)
 
 	WriteFile("Comb_Hypotheses_Stationary.txt", Comb_Hypotheses_Stationary)
-	WriteFile("Comb_Hypotheses_Progressive.txt", Comb_Hypotheses_Progressive)
+	WriteFile("Comb_Hypotheses_Progressive.txt", Comb_Hypotheses_Progressive)'''
 	
 	'''print("Addition_Hypotheses_Stationary")
 
