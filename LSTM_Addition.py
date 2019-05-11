@@ -19,6 +19,7 @@ class RNN(nn.Module):
         self.num_layers = num_layers
         self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
         self.fc = nn.Linear(hidden_size, num_classes)
+        self.softmax = nn.Softmax()
     
     def forward(self, x):
         # Set initial hidden and cell states 
@@ -30,6 +31,7 @@ class RNN(nn.Module):
         
         # Decode the hidden state of the last time step
         out = self.fc(out[:, -1, :])
+        out = self.softmax(out)
         return out
 
 def reverse(x):
@@ -111,13 +113,14 @@ def gen_data(d, length):
 
 
 
+
 def main():
 
 	sequence_length = 20
 	input_size = 30
 	hidden_size = 50
 	num_layers = 1
-	num_classes = 999
+	num_classes = 30
 	num_epochs = 1
 	learning_rate = 0.01
 	batch_size = 10
@@ -151,7 +154,7 @@ def main():
 	model = RNN(input_size, hidden_size, num_layers, num_classes).to(device, dtype=dtype)
 
 	# Loss and optimizer
-	criterion = nn.MSELoss()
+	criterion = nn.BCELoss()
 	optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 	total_step = len(train_loader)
@@ -160,15 +163,15 @@ def main():
 
 	for epoch in range(num_epochs):
 	    for i, (images, labels) in enumerate(train_loader):
-	    	print(images.shape)
-	    	print(labels.shape)
+	    	#print(images.shape)
+	    	#print(labels.shape)
 	    	images = images.reshape(-1, sequence_length, input_size).to(device, dtype=dtype)
-	    	print(images.shape)
+	    	#print(images.shape)
 	    	labels = labels.to(device, dtype=dtype)
-	    	print(images.shape)
+	    	#print(images.shape)
 	    	outputs = model(images)
-	    	print(outputs.shape)
-	    	print(labels.shape)
+	    	#print(outputs)
+	    	#print(labels)
 	    	loss = criterion(outputs, labels)
 
 	    	optimizer.zero_grad()
@@ -186,18 +189,21 @@ def main():
 	        images = images.reshape(-1, sequence_length, input_size).to(device, dtype=dtype)
 	        labels = labels.to(device, dtype=dtype)
 	        outputs = model(images)
-	        _, predicted = torch.max(outputs.data, 1)
+	        predicted = outputs #torch(outputs.data, 1)
 	        predicted = predicted.to(device, dtype=dtype)
 	        total += labels.size(0)
-	        correct += (predicted == labels).sum().item()
-	   		
+	        predicted = predicted.detach().numpy()
+	        labels = labels.detach().numpy()
+
 	        print(predicted)
 	        print(labels)
+
+	        correct += (predicted == labels).sum().item()
+	   	
 	    print(total)
 	    print(correct)
 
 	    print('Test Accuracy of the model on the test images: {} %'.format(100 * correct / total)) 
-
 
 
 if __name__== "__main__":
