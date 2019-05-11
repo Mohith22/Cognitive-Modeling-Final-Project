@@ -195,10 +195,33 @@ def main():
 	        predicted = predicted.detach().numpy()
 	        labels = labels.detach().numpy()
 
-	        print(predicted)
-	        print(labels)
+	        predicted_new = np.zeros_like(predicted)
 
-	        correct += (predicted == labels).sum().item()
+	        predicted = predicted.tolist()
+	        labels = labels.tolist()
+	        predicted_new = predicted_new.tolist()
+
+	        print(predicted_new)
+
+	        for i in range(len(predicted)):
+	        	pred1 = predicted[i][0:10]
+	        	pred2 = predicted[i][10:20]
+	        	pred3 = predicted[i][20:30]
+	        	index1 = predicted[i].index(max(pred1))
+	        	index2 = predicted[i].index(max(pred2))
+	        	index3 = predicted[i].index(max(pred3))
+	        	predicted_new[i][index1] = 1 
+	        	predicted_new[i][index2] = 1 
+	        	predicted_new[i][index3] = 1 
+
+	        for i in range(len(predicted_new)):
+
+	        	if (predicted_new[i] == labels[i]):
+	        		correct+=1
+	        #print(predicted_new)
+	        #print(labels)
+
+	        #correct += (predicted == labels).sum().item()
 	   	
 	    print(total)
 	    print(correct)
