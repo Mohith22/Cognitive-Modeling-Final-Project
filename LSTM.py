@@ -179,7 +179,7 @@ def main():
 	# Hyper-parameters
 	sequence_length = 5
 	input_size = 100
-	hidden_size = 1
+	hidden_size = 50
 	num_layers = 1
 	num_classes = 100
 	num_epochs = 1
