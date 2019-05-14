@@ -36,10 +36,10 @@ def GenSequencesProgressive(hypothesis, mean, variance, sequence_count):
 		if (hypothesis == "+"):
 			val = np.random.normal(mean, variance)
 			val = int(np.sign(val) * math.floor(abs(val)))
-			start = random.randint(1, 50) + val
+			start = random.randint(1, 900) + val
 			temp = start 
 			sequence = [temp]
-			factor = [ random.choice([i for i in range(1,7)]) ]
+			factor = [ random.choice([i for i in range(1,11)]) ]
 			for i in range(5):
 				val = np.random.normal(mean, variance)
 				val = int(np.sign(val) * math.floor(abs(val)))
@@ -53,7 +53,7 @@ def GenSequencesProgressive(hypothesis, mean, variance, sequence_count):
 			factor = [random.choice([2,3])]
 
 			if (factor[0] == 2):
-				start = random.randint(1,10)
+				start = random.randint(1,1000)
 				val = np.random.normal(mean, variance)
 				val = int(np.sign(val) * math.floor(abs(val)))
 				start = start + val
@@ -61,7 +61,7 @@ def GenSequencesProgressive(hypothesis, mean, variance, sequence_count):
 					continue
 
 			if (factor[0] == 3):
-				start = random.randint(1,4)
+				start = random.randint(1,30)
 				val = np.random.normal(mean, variance)
 				val = int(np.sign(val) * math.floor(abs(val)))
 				start = start + val
@@ -87,10 +87,10 @@ def GenSequencesProgressive(hypothesis, mean, variance, sequence_count):
 			if factor[0] == 2:
 				factor[1] = random.choice([i for i in range(1,11)])
 			if factor[0] == 3:
-				factor[1] = random.choice([i for i in range(1,6)])
+				factor[1] = random.choice([i for i in range(1,11)])
 
 			if (factor[0] == 2):
-				start = random.randint(1,7)
+				start = random.randint(1,1000)
 				val = np.random.normal(mean, variance)
 				val = int(np.sign(val) * math.floor(abs(val)))
 				start = start + val
@@ -98,7 +98,7 @@ def GenSequencesProgressive(hypothesis, mean, variance, sequence_count):
 					continue
 
 			if (factor[0] == 3):
-				start = random.randint(1,2)
+				start = random.randint(1,30)
 				if start <= 0:
 					continue
 
@@ -141,7 +141,7 @@ def GenSequencesStationary(hypothesis, mean, variance, sequence_count):
 		if (hypothesis == "+"):
 			val = np.random.normal(mean, variance)
 			val = int(np.sign(val) * math.floor(abs(val)))
-			start = random.randint(1, 41)
+			start = random.randint(1, 900)
 			temp_actual = start 
 			temp = start + val
 			sequence = [temp]
@@ -276,26 +276,27 @@ def main():
 	mean = 0
 	variance = 0.66
 
-	x = 5000
-	y = 300
-	z = 200
-	Addition_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"+",x)
-	Multiplication_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"x",z)
+	x = 300
+	#y = 3000
+	#z = 200
+	
+	#Addition_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"+",x)
+	#Multiplication_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"x",z)
 
-	Addition_Hypotheses_Progressive = GenNoiseProgressive(0,0.66,"+",x)
-	Multiplication_Hypotheses_Progressive = GenNoiseProgressive(0,0.66,"x",y)
+	#Addition_Hypotheses_Progressive = GenNoiseProgressive(0,0.66,"+",x)
+	#Multiplication_Hypotheses_Progressive = GenNoiseProgressive(mean, variance,"x",x)
 
-	Comb_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"x+",z)
-	Comb_Hypotheses_Progressive = GenNoiseProgressive(0,0.66,"x+",y)
+	#Comb_Hypotheses_Stationary = GenNoiseStationary(0,0.66,"x+",z)
+	Comb_Hypotheses_Progressive = GenNoiseProgressive(mean,variance,"x+",x)
 
-	#WriteFile("Addition_Hypotheses_Stationary.txt", Addition_Hypotheses_Stationary)
-	WriteFile("Addition_Hypotheses_Progressive2.txt", Addition_Hypotheses_Progressive)
+	#WriteFile("Addition_Hypotheses_Stationary_LSTM.txt", Addition_Hypotheses_Stationary)
+	#WriteFile("Addition_Hypotheses_Progressive_LSTM.txt", Addition_Hypotheses_Progressive)
 
-	'''WriteFile("Multiplication_Hypotheses_Stationary.txt", Multiplication_Hypotheses_Stationary)
-	WriteFile("Multiplication_Hypotheses_Progressive.txt", Multiplication_Hypotheses_Progressive)
-
-	WriteFile("Comb_Hypotheses_Stationary.txt", Comb_Hypotheses_Stationary)
-	WriteFile("Comb_Hypotheses_Progressive.txt", Comb_Hypotheses_Progressive)'''
+	#WriteFile("Multiplication_Hypotheses_Stationary.txt", Multiplication_Hypotheses_Stationary)
+	#WriteFile("Multiplication_Hypotheses_Progressive_LSTM.txt", Multiplication_Hypotheses_Progressive)
+	'''
+	WriteFile("Comb_Hypotheses_Stationary.txt", Comb_Hypotheses_Stationary)'''
+	WriteFile("Comb_Hypotheses_Progressive_LSTM.txt", Comb_Hypotheses_Progressive)
 	
 	'''print("Addition_Hypotheses_Stationary")
 

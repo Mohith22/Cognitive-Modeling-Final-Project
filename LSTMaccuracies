@@ -1,0 +1,66 @@
+LSTM Accuracies: 
+
+Addition 
+
+With Noise:-
+	Epochs: 30
+	Batch size: 16
+	Number of hidden layers: 2
+	Train data: 2500
+	MAX_Number: 999
+
+	Accuracy: 70.2 %
+
+Without Noise:-
+	Epochs: 30
+	Batch size: 16
+	Number of hidden layers: 2
+	Train data: 2500
+	MAX_Number: 999
+
+	Accuracy: 99.21 %
+
+
+Multiplication 
+
+
+With Noise:-
+	Epochs: 30
+	Batch size: 16 
+	Number of hidden layers: 2
+	Train data: 500
+	MAX_Number: 99999 
+
+	Accuracy:  18.0 %
+
+Without Noise:-
+	Epochs: 30
+	Batch size: 16 
+	Number of hidden layers: 2
+	Train data: 500
+	MAX_Number: 99999
+
+	Accuracy:   48.0 %
+
+
+Combination
+
+
+With Noise:-
+	Epochs: 30
+	Batch size: 16
+	Number of hidden layers: 2
+	Train data: 300 
+	MAX_Number: 99999
+
+	Accuracy: 15%
+
+Without Noise:-
+	Epochs: 30
+	Batch size: 16
+	Number of hidden layers: 2
+	Train data: 300
+	MAX_Number: 99999
+
+	Accuracy: 21.0 %   
+

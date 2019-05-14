@@ -36,7 +36,7 @@ class RNN(nn.Module):
 
 def reverse(x):
 
-	numbers = [0,0,0]
+	numbers = [0,0,0,0,0]
 	i = 0
 	while x:
 		numbers[i] = x % 10
@@ -49,16 +49,18 @@ def encode_number(x):
 	v1 = [0 for i in range(10)]
 	v2 = [0 for i in range(10)]
 	v3 = [0 for i in range(10)]
-
+	v4 = [0 for i in range(10)]
+	v5 = [0 for i in range(10)]
 
 	number_list = reverse(x)
 
+	v5[number_list[0]] = 1
+	v4[number_list[1]] = 1
+	v3[number_list[2]] = 1
+	v2[number_list[3]] = 1
+	v1[number_list[4]] = 1
 
-	v3[number_list[0]] = 1
-	v2[number_list[1]] = 1
-	v1[number_list[2]] = 1
-
-	return v1 + v2 + v3
+	return v1 + v2 + v3 + v4 + v5
 
 def data_point(c, d, length):
 
@@ -124,11 +126,11 @@ def read_file(filename):
 def main():
 
 	sequence_length = 5
-	input_size = 30
+	input_size = 50
 	hidden_size = 50
 	num_layers = 2
-	num_classes = 30
-	num_epochs = 30
+	num_classes = 50
+	num_epochs = 60
 	learning_rate = 0.01
 	batch_size = 16
 	
@@ -141,7 +143,7 @@ def main():
 
 	random.shuffle(data_set)'''
 
-	addition_hypotheses = read_file("Addition_Hypotheses_Progressive_LSTM.txt")
+	addition_hypotheses = read_file("Multiplication_Hypotheses_Progressive_LSTM.txt")
 	random.shuffle(addition_hypotheses)
 
 	data_set = addition_hypotheses
@@ -247,12 +249,18 @@ def main():
 	        	pred1 = predicted[i][0:10]
 	        	pred2 = predicted[i][10:20]
 	        	pred3 = predicted[i][20:30]
+	        	pred4 = predicted[i][30:40]
+	        	pred5 = predicted[i][40:50]
 	        	index1 = predicted[i].index(max(pred1))
 	        	index2 = predicted[i].index(max(pred2))
 	        	index3 = predicted[i].index(max(pred3))
+	        	index4 = predicted[i].index(max(pred4))
+	        	index5 = predicted[i].index(max(pred5))
 	        	predicted_new[i][index1] = 1 
 	        	predicted_new[i][index2] = 1 
 	        	predicted_new[i][index3] = 1 
+	        	predicted_new[i][index4] = 1 
+	        	predicted_new[i][index5] = 1 
 	        for i in range(len(predicted_new)):
 
 	        	if (predicted_new[i] == labels[i]):
