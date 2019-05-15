@@ -1,6 +1,14 @@
 # Cognitive-Modeling-Final-Project
 Final Project for the course Computational Cognitive Modeling at New York University 
 
+Under Prof. Brenden Lake and Prof. Todd Gureckis
+
+Done by 
+
+Damarapati Mohith
+Enaganti Inavamsi Bhaskar
+Rajakumar Alfred Ajay Aureate
+
 Abstract
 
 
